@@ -1,31 +1,1044 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mohammed Nasser — Engineering Leader · Mobile at Scale</title>
-  <meta name="description" content="Mobile technical lead with 8+ years building Saudi Arabia's flagship consumer apps. Scaled teams, owned architecture, and shipped products used by millions." />
-  <link rel="icon" href="https://avatars.githubusercontent.com/u/35014984?v=4" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={theme:{extend:{colors:{dark:{900:'#0a0c12',950:'#06070b'}},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>body{background:#06070b;color:#e2e8f0}.gradient-text{background:linear-gradient(135deg,#38bdf8,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.card-hover{transition:all .3s ease}.card-hover:hover{transform:translateY(-4px);border-color:rgba(56,189,248,.4);box-shadow:0 20px 40px -15px rgba(56,189,248,.15)}.section-pad{padding:5rem 0}@media(max-width:768px){.section-pad{padding:3.5rem 0}}</style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mohammed Nasser — Engineering Leader · Mobile at Scale</title>
+<meta name="description" content="Mobile technical lead with 8+ years building Saudi Arabia's flagship consumer apps. Scaled teams, owned architecture, and shipped products used by millions." />
+<meta property="og:title" content="Mohammed Nasser — Engineering Leader · Mobile at Scale" />
+<meta property="og:description" content="Koora Break, AlInma Pay, Riyadh Season, SFA, Webook, The Ring, F1 Saudi GP, Esports World Cup and more — apps shipped to millions." />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/35014984?v=4" />
+<meta name="theme-color" content="#06070b" />
+<link rel="icon" href="https://avatars.githubusercontent.com/u/35014984?v=4" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #06070b;
+    --bg-2: #0a0c12;
+    --fg: #e8ecf4;
+    --muted: #8b94a7;
+    --dim: #5b6274;
+    --line: rgba(255, 255, 255, 0.07);
+    --sky: #38bdf8;
+    --indigo: #818cf8;
+    --violet: #c084fc;
+    --radius: 18px;
+    --nav-h: 64px;
+  }
+
+  html, body {
+    background: var(--bg);
+    font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: var(--fg);
+  }
+  body {
+    background:
+      radial-gradient(900px 600px at 15% 0%, rgba(56, 189, 248, 0.10), transparent 60%),
+      radial-gradient(800px 600px at 90% 20%, rgba(129, 140, 248, 0.08), transparent 60%),
+      var(--bg);
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(56, 189, 248, 0.35); }
+
+  a { color: inherit; text-decoration: none; }
+
+  canvas#gl {
+    position: fixed;
+    inset: 0;
+    display: block;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  #scroll-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    will-change: transform;
+    z-index: 2;
+  }
+
+  .wrap { width: min(1180px, 100% - 12vw); margin: 0 auto; }
+
+  /* ---------- nav ---------- */
+  nav.nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(6, 7, 11, 0.85), rgba(6, 7, 11, 0.55));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.nav .wrap { display: flex; align-items: center; justify-content: space-between; }
+  nav.nav .brand { font-weight: 800; letter-spacing: -0.02em; font-size: 18px; }
+  nav.nav .brand b { color: var(--sky); }
+  nav.nav ul { display: flex; gap: 28px; list-style: none; font-size: 14px; color: var(--muted); }
+  nav.nav ul a { transition: color .25s; }
+  nav.nav ul a:hover { color: #fff; }
+  nav.nav ul a.cta {
+    padding: 8px 16px;
+    border-radius: 999px;
+    color: var(--sky);
+    background: rgba(56, 189, 248, 0.10);
+    border: 1px solid rgba(56, 189, 248, 0.22);
+  }
+  nav.nav ul a.cta:hover { background: rgba(56, 189, 248, 0.20); color: var(--sky); }
+  @media (max-width: 760px) { nav.nav ul li:not(:last-child) { display: none; } }
+
+  /* ---------- hero ---------- */
+  header.hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: calc(var(--nav-h) + 6vw) 6vw 5vw;
+    position: relative;
+  }
+  .eyebrow {
+    color: var(--sky);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  header.hero h1 {
+    margin-top: 22px;
+    font-size: clamp(56px, 10.5vw, 168px);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.9;
+  }
+  header.hero h1 .grad {
+    background: linear-gradient(135deg, var(--sky), var(--indigo), var(--violet));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  header.hero p.lede {
+    max-width: 520px;
+    color: var(--muted);
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.65;
+  }
+  .btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    transition: transform .3s cubic-bezier(.2,.8,.2,1), background .3s, border-color .3s;
+  }
+  .btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.25); }
+  .btn.primary { background: var(--sky); color: #06070b; border-color: var(--sky); }
+  .btn.primary:hover { background: #7dd3fc; }
+  .stats { display: flex; gap: 40px; }
+  .stats div span { display: block; }
+  .stats .n { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .stats .l { margin-top: 8px; font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.12em; }
+  .scroll-hint {
+    position: absolute;
+    right: 6vw;
+    top: calc(var(--nav-h) + 6vw);
+    display: flex; align-items: center; gap: 12px;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim);
+  }
+  .scroll-hint i {
+    display: block; width: 1px; height: 64px;
+    background: linear-gradient(to bottom, transparent, var(--sky), transparent);
+    animation: hint 2.2s ease-in-out infinite;
+  }
+  @keyframes hint { 0%,100% { transform: scaleY(0.4); opacity: .4 } 50% { transform: scaleY(1); opacity: 1 } }
+  @media (max-width: 640px) {
+    header.hero { min-height: 88svh; }
+    .scroll-hint { display: none; }
+    .stats { gap: 26px }
+    .stats .n { font-size: 28px }
+  }
+
+  /* intro */
+  .up { opacity: 0; transform: translateY(28px); animation: up 1s cubic-bezier(.2,.8,.2,1) forwards; }
+  .up.d1 { animation-delay: .08s } .up.d2 { animation-delay: .2s } .up.d3 { animation-delay: .34s } .up.d4 { animation-delay: .48s }
+  @keyframes up { to { opacity: 1; transform: none } }
+
+  /* ---------- sections ---------- */
+  section { padding: 9vw 6vw; }
+  .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 5vw; flex-wrap: wrap; }
+  .sec-head h2 { font-size: clamp(30px, 4vw, 54px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; margin-top: 14px; }
+  .sec-head p { max-width: 420px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+
+  /* ---------- work grid ---------- */
+  #work { padding-top: 4vw; }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5vw 3vw;
+  }
+  .card { position: relative; width: calc((100% - 6vw) / 3); }
+  @media (max-width: 1023px) { .card { width: calc((100% - 3vw) / 2); } }
+  @media (max-width: 639px)  { .grid { gap: 56px } .card { width: 100%; } }
+
+  .card-media {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #0d1017;
+    transition: transform .6s cubic-bezier(.2,.8,.2,1);
+    will-change: transform;
+  }
+  .card:hover .card-media { transform: translateY(-8px); }
+  .card-media img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top;
+    display: block;
+    transition: opacity .4s;
+  }
+  html.gl .card-media img { opacity: 0; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .card-meta img.icon {
+    width: 40px; height: 40px;
+    border-radius: 11px;
+    flex: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  }
+  .card-meta .t { flex: 1; min-width: 0; }
+  .card-meta h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.015em; transition: color .3s; }
+  .card:hover .card-meta h3 { color: var(--sky); }
+  .card-meta .sub { margin-top: 3px; font-size: 12px; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card-meta .stat { text-align: right; flex: none; }
+  .card-meta .stat b { display: block; font-size: 18px; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .card-meta .stat span { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+  .card p.desc {
+    margin-top: 12px;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .card ul.stack { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .card ul.stack li {
+    font-size: 11px; color: var(--muted);
+    padding: 4px 9px; border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.02);
+  }
+  .card .idx {
+    position: absolute; top: -22px; left: 2px;
+    font-size: 11px; color: var(--dim); letter-spacing: 0.14em; font-variant-numeric: tabular-nums;
+  }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- companies ---------- */
+  .logos {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+  }
+  .logos span {
+    padding: 12px 22px; border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--muted); font-weight: 600; font-size: 15px; letter-spacing: -0.01em;
+    transition: color .3s, border-color .3s, background .3s;
+  }
+  .logos span:hover { color: #fff; border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.03); }
+  #companies { padding-top: 0; }
+  #companies .center { text-align: center; margin-bottom: 40px; }
+  #companies .center h2 { font-size: clamp(26px, 3vw, 40px); font-weight: 800; letter-spacing: -0.03em; margin-top: 12px; }
+
+  /* ---------- experience ---------- */
+  .xp { border-top: 1px solid var(--line); }
+  .xp .row {
+    display: grid; grid-template-columns: 220px 1fr; gap: 24px;
+    padding: 36px 0; border-bottom: 1px solid var(--line);
+  }
+  .xp .when { color: var(--dim); font-size: 13px; font-variant-numeric: tabular-nums; padding-top: 4px; }
+  .xp h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .xp .co { color: var(--sky); margin: 6px 0 12px; font-size: 14px; }
+  .xp p { color: var(--muted); font-size: 15px; line-height: 1.65; max-width: 720px; }
+  @media (max-width: 760px) { .xp .row { grid-template-columns: 1fr; gap: 8px; } }
+
+  /* ---------- about ---------- */
+  .about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 6vw; align-items: center; }
+  .about h2 { font-size: clamp(28px, 3.6vw, 48px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; margin: 14px 0 24px; }
+  .about p { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 16px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .chips span { font-size: 13px; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); }
+  .about-side { position: relative; }
+  .about-side .glow { position: absolute; inset: -30px; background: radial-gradient(closest-side, rgba(56,189,248,0.22), transparent); filter: blur(20px); }
+  .about-side img { position: relative; width: 100%; border-radius: 24px; border: 1px solid var(--line); aspect-ratio: 1; object-fit: cover; }
+  .facts { display: grid; gap: 10px; margin-top: 14px; position: relative; }
+  .facts div { border: 1px solid var(--line); background: rgba(10,12,18,0.7); border-radius: 14px; padding: 14px 16px; }
+  .facts small { display: block; color: var(--dim); font-size: 12px; margin-bottom: 3px; }
+  .facts b { font-weight: 600; font-size: 14px; }
+  @media (max-width: 860px) { .about { grid-template-columns: 1fr; } .about-side { max-width: 420px; } }
+
+  /* ---------- contact ---------- */
+  #contact { text-align: center; }
+  #contact h2 { font-size: clamp(34px, 6vw, 84px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.98; margin: 16px auto 22px; max-width: 900px; }
+  #contact p { color: var(--muted); font-size: 16px; }
+  #contact .btns { justify-content: center; margin-top: 34px; }
+  #contact .small { margin-top: 28px; color: var(--dim); font-size: 13px; }
+
+  footer {
+    padding: 40px 6vw 48px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    color: var(--dim);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  footer kbd {
+    font-family: inherit; font-size: 11px; padding: 2px 6px; border-radius: 5px;
+    border: 1px solid var(--line); color: var(--muted);
+  }
+
+  /* ---------- tweak panel ---------- */
+  .panel {
+    position: fixed;
+    top: calc(var(--nav-h) + 16px);
+    right: 16px;
+    width: 250px;
+    background: rgba(10, 12, 18, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 11px;
+    color: #cbd2de;
+    z-index: 40;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+  .panel h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; color: var(--dim); }
+  .panel .row { margin-bottom: 10px; }
+  .panel label { display: flex; justify-content: space-between; margin-bottom: 3px; color: var(--muted); }
+  .panel input[type="range"] { width: 100%; accent-color: var(--sky); }
+  .panel .readout { margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--line); color: var(--dim); font-variant-numeric: tabular-nums; }
+  .panel.hidden { display: none; }
+</style>
 </head>
-<body class="font-sans antialiased">
-<nav class="fixed top-0 w-full z-50 bg-dark-950/80 backdrop-blur-xl border-b border-white/5"><div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between"><a href="#" class="font-bold text-lg">MN<span class="text-sky-400">.</span></a><div class="hidden md:flex items-center gap-8 text-sm text-slate-400"><a href="#work" class="hover:text-white transition">Work</a><a href="#experience" class="hover:text-white transition">Experience</a><a href="#companies" class="hover:text-white transition">Companies</a><a href="#about" class="hover:text-white transition">About</a><a href="#contact" class="px-4 py-2 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20 hover:bg-sky-500/20 transition">Contact</a></div></div></nav>
-<header class="min-h-screen flex items-center pt-16"><div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center"><div><p class="text-sky-400 font-medium mb-4 tracking-wide text-sm uppercase">Engineering Leader · Mobile at Scale</p><h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">Mohammed<br/><span class="gradient-text">Nasser</span></h1><p class="text-lg text-slate-400 mb-8 max-w-lg leading-relaxed">8+ years shipping Saudi Arabia’s flagship consumer apps used by millions. I own technical vision, architecture, and the teams that deliver it.</p><div class="flex flex-wrap gap-4"><a href="#work" class="px-6 py-3 rounded-full bg-sky-500 text-dark-950 font-semibold hover:bg-sky-400 transition">View Work</a><a href="https://linkedin.com/in/mohmdalfaha" target="_blank" class="px-6 py-3 rounded-full border border-white/10 hover:border-white/30 transition">LinkedIn</a></div><div class="mt-10 flex gap-8 text-sm"><div><span class="block text-2xl font-bold text-white">8+</span><span class="text-slate-500">Years</span></div><div><span class="block text-2xl font-bold text-white">10</span><span class="text-slate-500">Engineers led</span></div><div><span class="block text-2xl font-bold text-white">5M+</span><span class="text-slate-500">Users reached</span></div></div></div><div class="relative"><div class="absolute -inset-4 bg-sky-500/20 blur-3xl rounded-full"></div><img src="https://avatars.githubusercontent.com/u/35014984?v=4" alt="Mohammed Nasser" class="relative rounded-2xl w-full max-w-md mx-auto border border-white/10 object-cover aspect-square" style="box-shadow:0 0 60px -15px rgba(56,189,248,.25)" /></div></div></header>
-<section id="work" class="section-pad border-t border-white/5"><div class="max-w-6xl mx-auto px-6"><div class="mb-14"><p class="text-sky-400 text-sm font-medium uppercase tracking-wider mb-2">Selected Work</p><h2 class="text-3xl md:text-4xl font-bold">Projects that shipped to millions</h2></div><div class="grid gap-6">
-<article class="card-hover group rounded-2xl border border-white/5 bg-dark-900/50 p-6 md:p-8 grid md:grid-cols-12 gap-6"><div class="md:col-span-8"><div class="flex flex-wrap gap-2 mb-3"><span class="text-xs px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-400">iOS · Android</span><span class="text-xs px-2.5 py-1 rounded-full bg-white/5 text-slate-400">Live Sports</span></div><h3 class="text-2xl font-bold mb-2 group-hover:text-sky-400 transition">Koora Break</h3><p class="text-slate-400 mb-4">Set the technical vision and rebuilt the app from the ground up. Real-time scores via Socket.io, live-activity widgets, push, and a full telemetry layer.</p><div class="flex flex-wrap gap-2 text-xs text-slate-500"><span>React Native</span><span>·</span><span>Redux + RTK Query</span><span>·</span><span>Socket.io</span><span>·</span><span>RevenueCat</span><span>·</span><span>Sentry</span></div></div><div class="md:col-span-4 flex flex-col justify-center md:items-end"><p class="text-3xl font-bold text-white">383K</p><p class="text-slate-500 text-sm">Downloads</p></div></article>
-<article class="card-hover group rounded-2xl border border-white/5 bg-dark-900/50 p-6 md:p-8 grid md:grid-cols-12 gap-6"><div class="md:col-span-8"><div class="flex flex-wrap gap-2 mb-3"><span class="text-xs px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-400">iOS · Android · Web</span><span class="text-xs px-2.5 py-1 rounded-full bg-white/5 text-slate-400">Fintech</span></div><h3 class="text-2xl font-bold mb-2 group-hover:text-sky-400 transition">AlInma Pay</h3><p class="text-slate-400 mb-4">Supervised a vendor team of 10+ developers on a national digital wallet. Code reviews, technical blockers, and quality gates for a high-stakes regulated product.</p></div><div class="md:col-span-4 flex flex-col justify-center md:items-end"><p class="text-3xl font-bold text-white">1M+</p><p class="text-slate-500 text-sm">Downloads</p></div></article>
-<article class="card-hover group rounded-2xl border border-white/5 bg-dark-900/50 p-6 md:p-8 grid md:grid-cols-12 gap-6"><div class="md:col-span-8"><div class="flex flex-wrap gap-2 mb-3"><span class="text-xs px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-400">iOS · Android · Web</span><span class="text-xs px-2.5 py-1 rounded-full bg-white/5 text-slate-400">Entertainment</span></div><h3 class="text-2xl font-bold mb-2 group-hover:text-sky-400 transition">Riyadh Season</h3><p class="text-slate-400 mb-4">Revamped the entire app UI for the 2025 season and led the new events-calendar integration with the Webook system.</p></div><div class="md:col-span-4 flex flex-col justify-center md:items-end"><p class="text-3xl font-bold text-white">580K</p><p class="text-slate-500 text-sm">Downloads</p></div></article>
-<article class="card-hover group rounded-2xl border border-white/5 bg-dark-900/50 p-6 md:p-8 grid md:grid-cols-12 gap-6"><div class="md:col-span-8"><div class="flex flex-wrap gap-2 mb-3"><span class="text-xs px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-400">iOS · Android</span><span class="text-xs px-2.5 py-1 rounded-full bg-white/5 text-slate-400">Fitness</span></div><h3 class="text-2xl font-bold mb-2 group-hover:text-sky-400 transition">SFA — Super Fitness App</h3><p class="text-slate-400 mb-4">Led from the ground up: 200+ screens, 200+ APIs. Social, groups, events, facility ticketing, gamification, health tracking, and Domes ticketing integration.</p><div class="flex flex-wrap gap-2 text-xs text-slate-500"><span>React Native</span><span>·</span><span>MobX</span><span>·</span><span>HealthKit / Google Fit</span></div></div><div class="md:col-span-4 flex flex-col justify-center md:items-end"><p class="text-3xl font-bold text-white">537K</p><p class="text-slate-500 text-sm">Downloads</p></div></article>
-<article class="card-hover group rounded-2xl border border-white/5 bg-dark-900/50 p-6 md:p-8 grid md:grid-cols-12 gap-6"><div class="md:col-span-8"><div class="flex flex-wrap gap-2 mb-3"><span class="text-xs px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-400">iOS · Android · Web</span><span class="text-xs px-2.5 py-1 rounded-full bg-white/5 text-slate-400">Super App</span></div><h3 class="text-2xl font-bold mb-2 group-hover:text-sky-400 transition">Webook Super App</h3><p class="text-slate-400 mb-4">Company-wide reusable architecture, multi-language + RTL, MobX patterns, and new best practices. Contributed across the platform that powers major Saudi entertainment experiences.</p></div><div class="md:col-span-4 flex flex-col justify-center md:items-end"><p class="text-3xl font-bold text-white">1M+</p><p class="text-slate-500 text-sm">Downloads</p></div></article>
-<article class="card-hover group rounded-2xl border border-white/5 bg-dark-900/50 p-6 md:p-8 grid md:grid-cols-12 gap-6"><div class="md:col-span-8"><div class="flex flex-wrap gap-2 mb-3"><span class="text-xs px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-400">iOS · Android · Web</span><span class="text-xs px-2.5 py-1 rounded-full bg-white/5 text-slate-400">Media</span></div><h3 class="text-2xl font-bold mb-2 group-hover:text-sky-400 transition">The Ring — Ring Magazine</h3><p class="text-slate-400 mb-4">Architected a modular app for worldwide boxing fans. Custom SSO, in-app subscriptions (RevenueCat), NCA-audited security with SSL pinning, Strapi CMS, multi-language.</p><div class="flex flex-wrap gap-2 text-xs text-slate-500"><span>React Native</span><span>·</span><span>Talsec</span><span>·</span><span>RevenueCat</span><span>·</span><span>Stripe</span></div></div><div class="md:col-span-4 flex flex-col justify-center md:items-end"><p class="text-3xl font-bold text-white">50K</p><p class="text-slate-500 text-sm">Downloads</p></div></article>
-<div class="grid md:grid-cols-2 gap-6"><article class="card-hover rounded-2xl border border-white/5 bg-dark-900/50 p-6"><div class="flex justify-between items-start mb-3"><h3 class="text-xl font-bold">F1 Saudi Arabian GP</h3><span class="text-lg font-semibold text-sky-400">250K</span></div><p class="text-slate-400 text-sm mb-3">Fan companion app. Contentful CMS, custom notifications, geolocation, Situm maps, Mixpanel.</p><p class="text-xs text-slate-500">React Native · GraphQL · Contentful</p></article><article class="card-hover rounded-2xl border border-white/5 bg-dark-900/50 p-6"><div class="flex justify-between items-start mb-3"><h3 class="text-xl font-bold">Esports World Cup</h3><span class="text-lg font-semibold text-sky-400">20K+</span></div><p class="text-slate-400 text-sm mb-3">Architected and delivered a global fan app in 3 weeks — predictions, leaderboards, social sharing.</p><p class="text-xs text-slate-500">React Native · MobX · Firebase</p></article><article class="card-hover rounded-2xl border border-white/5 bg-dark-900/50 p-6"><div class="flex justify-between items-start mb-3"><h3 class="text-xl font-bold">Burgerizzr</h3><span class="text-lg font-semibold text-sky-400">500K+</span></div><p class="text-slate-400 text-sm mb-3">Restaurant app from scratch. Foodics + payments integration, UX optimization.</p></article><article class="card-hover rounded-2xl border border-white/5 bg-dark-900/50 p-6"><div class="flex justify-between items-start mb-3"><h3 class="text-xl font-bold">Enjoy.sa</h3><span class="text-lg font-semibold text-sky-400">200K+</span></div><p class="text-slate-400 text-sm mb-3">Built from scratch for the General Entertainment Authority (GEA).</p></article></div></div></div></section>
-<section id="companies" class="section-pad border-t border-white/5 bg-dark-900/30"><div class="max-w-6xl mx-auto px-6"><div class="mb-12 text-center"><p class="text-sky-400 text-sm font-medium uppercase tracking-wider mb-2">Trusted by</p><h2 class="text-3xl font-bold">Companies & Clients</h2></div><div class="flex flex-wrap justify-center gap-x-12 gap-y-8 items-center text-slate-400 text-lg font-medium"><span class="hover:text-white transition">Uxbert Labs</span><span class="hover:text-white transition">Webook</span><span class="hover:text-white transition">AlInma</span><span class="hover:text-white transition">PIF</span><span class="hover:text-white transition">Royal Court</span><span class="hover:text-white transition">GEA</span><span class="hover:text-white transition">Ring Magazine</span><span class="hover:text-white transition">Ministry of Sports</span><span class="hover:text-white transition">SFA</span><span class="hover:text-white transition">Koora Break</span></div></div></section>
-<section id="experience" class="section-pad border-t border-white/5"><div class="max-w-6xl mx-auto px-6"><div class="mb-14"><p class="text-sky-400 text-sm font-medium uppercase tracking-wider mb-2">Career</p><h2 class="text-3xl md:text-4xl font-bold">Experience</h2></div><div class="space-y-10"><div class="grid md:grid-cols-12 gap-4"><div class="md:col-span-3 text-slate-500 text-sm">Dec 2023 — Present</div><div class="md:col-span-9"><h3 class="text-xl font-bold">Lead Mobile Engineer</h3><p class="text-sky-400 mb-2">Uxbert Labs (SuperTech Group) · Riyadh</p><p class="text-slate-400">Scaled the mobile engineering function from 0 → 10 engineers (7 direct reports). Owned technical delivery for PIF, Ring Magazine, GEA, Royal Court, AlInma Pay, and Webook. Established architecture, quality standards, release governance, and performance engineering across the portfolio.</p></div></div><div class="grid md:grid-cols-12 gap-4"><div class="md:col-span-3 text-slate-500 text-sm">2022 — Dec 2023</div><div class="md:col-span-9"><h3 class="text-xl font-bold">Technical Lead</h3><p class="text-sky-400 mb-2">SFA – Webook (SuperTech Group)</p><p class="text-slate-400">Led 7+ developers, designers, QA and BAs. Structured multi-microservice integration (ticketing, community, gamification, loyalty). Owned SDLC, code quality, and Domes facility-ticketing platform.</p></div></div><div class="grid md:grid-cols-12 gap-4"><div class="md:col-span-3 text-slate-500 text-sm">Feb 2020 — Dec 2022</div><div class="md:col-span-9"><h3 class="text-xl font-bold">Senior React Native Developer</h3><p class="text-sky-400 mb-2">Uxbert Labs</p><p class="text-slate-400">Built SFA from scratch (200+ screens). Health trackers, analytics, deeplinking, monitoring. Introduced MobX patterns and React hooks best practices across the company.</p></div></div><div class="grid md:grid-cols-12 gap-4"><div class="md:col-span-3 text-slate-500 text-sm">2019 — 2020</div><div class="md:col-span-9"><h3 class="text-xl font-bold">React Native Developer</h3><p class="text-sky-400 mb-2">Tarmeez · Riyadh</p><p class="text-slate-400">Built and maintained government and private apps. Hired and mentored developers. Google Maps, Payfort payments, pixel-perfect delivery.</p></div></div></div></div></section>
-<section id="about" class="section-pad border-t border-white/5 bg-dark-900/30"><div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center"><div><p class="text-sky-400 text-sm font-medium uppercase tracking-wider mb-2">About</p><h2 class="text-3xl font-bold mb-6">Hands-on leader who still ships</h2><p class="text-slate-400 leading-relaxed mb-4">I translate product and business scope into technical execution. I care about modular architecture, in-app payments, NCA-audited security, real-time systems, and performance. I’m a pragmatic AI advocate — I set the guardrails so teams move faster without shipping low-quality output.</p><p class="text-slate-400 leading-relaxed mb-6">I also run the React / React Native Arab Telegram community (5K+ members) and mentor developers.</p><div class="flex flex-wrap gap-3 text-sm"><span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">React Native</span><span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">TypeScript</span><span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">Architecture</span><span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">Team Leadership</span><span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">Payments</span><span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">Security</span></div></div><div class="space-y-4"><div class="rounded-xl border border-white/5 bg-dark-950 p-5"><p class="text-slate-500 text-sm mb-1">Languages</p><p class="font-medium">Arabic (Native) · English (Fluent)</p></div><div class="rounded-xl border border-white/5 bg-dark-950 p-5"><p class="text-slate-500 text-sm mb-1">Education</p><p class="font-medium">BCA · Bangalore University</p></div><div class="rounded-xl border border-white/5 bg-dark-950 p-5"><p class="text-slate-500 text-sm mb-1">Location</p><p class="font-medium">Riyadh, Saudi Arabia · Premium Residency</p></div></div></div></section>
-<section id="contact" class="section-pad border-t border-white/5"><div class="max-w-3xl mx-auto px-6 text-center"><p class="text-sky-400 text-sm font-medium uppercase tracking-wider mb-2">Get in touch</p><h2 class="text-3xl md:text-4xl font-bold mb-6">Let’s build something that scales</h2><p class="text-slate-400 mb-10">Open to leadership roles, consulting, and high-impact mobile products.</p><div class="flex flex-wrap justify-center gap-4"><a href="mailto:mohmd1919@gmail.com" class="px-6 py-3 rounded-full bg-sky-500 text-dark-950 font-semibold hover:bg-sky-400 transition">mohmd1919@gmail.com</a><a href="https://linkedin.com/in/mohmdalfaha" target="_blank" class="px-6 py-3 rounded-full border border-white/10 hover:border-white/30 transition">LinkedIn</a><a href="https://github.com/mohmdalfaha" target="_blank" class="px-6 py-3 rounded-full border border-white/10 hover:border-white/30 transition">GitHub</a></div><p class="mt-8 text-slate-500 text-sm">+966 56 747 2672 · Riyadh</p></div></section>
-<footer class="border-t border-white/5 py-8 text-center text-slate-600 text-sm"><p>© 2026 Mohammed Nasser. Built with care.</p></footer>
+<body>
+
+  <canvas id="gl"></canvas>
+
+  <nav class="nav">
+    <div class="wrap">
+      <a href="#top" class="brand">MN<b>.</b></a>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact" class="cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="scroll-container">
+    <header class="hero" id="top">
+      <div class="scroll-hint up d4"><span>scroll</span><i></i></div>
+      <p class="eyebrow up d1">Engineering Leader · Mobile at Scale</p>
+      <h1 class="up d2">Mohammed<br><span class="grad">Nasser</span></h1>
+      <div class="hero-row up d3">
+        <div>
+          <p class="lede">8+ years shipping Saudi Arabia’s flagship consumer apps used by millions.
+            I own technical vision, architecture, and the teams that deliver it.</p>
+          <div class="btns">
+            <a href="#work" class="btn primary">View work ↓</a>
+            <a href="https://linkedin.com/in/mohmdalfaha" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+            <a href="CV.pdf" target="_blank" rel="noopener" class="btn">CV</a>
+          </div>
+        </div>
+        <div class="stats">
+          <div><span class="n">8+</span><span class="l">Years</span></div>
+          <div><span class="n">10</span><span class="l">Engineers led</span></div>
+          <div><span class="n">5M+</span><span class="l">Users reached</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section id="work">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow">Selected work</p>
+          <h2>Apps that shipped<br>to millions</h2>
+        </div>
+        <p>Every card is a live App Store screenshot. Hover to see a second screen,
+          click to open the store listing — and scroll fast to bend the whole page.</p>
+      </div>
+      <main class="grid" id="grid"></main>
+    </section>
+
+    <section id="companies">
+      <div class="center reveal">
+        <p class="eyebrow">Trusted by</p>
+        <h2>Companies &amp; clients</h2>
+      </div>
+      <div class="logos reveal">
+        <span>Uxbert Labs</span><span>Webook</span><span>AlInma</span><span>PIF</span>
+        <span>Royal Court</span><span>GEA</span><span>Ring Magazine</span>
+        <span>Ministry of Sports</span><span>SFA</span><span>Koora Break</span>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow">Career</p>
+          <h2>Experience</h2>
+        </div>
+        <p>From senior React Native engineer to leading a 10-person mobile function
+          across a portfolio of national-scale products.</p>
+      </div>
+      <div class="xp">
+        <div class="row reveal">
+          <div class="when">Dec 2023 — Present</div>
+          <div>
+            <h3>Lead Mobile Engineer</h3>
+            <p class="co">Uxbert Labs (SuperTech Group) · Riyadh</p>
+            <p>Scaled the mobile engineering function from 0 → 10 engineers (7 direct reports).
+              Owned technical delivery for PIF, Ring Magazine, GEA, Royal Court, AlInma Pay, and Webook.
+              Established architecture, quality standards, release governance, and performance engineering across the portfolio.</p>
+          </div>
+        </div>
+        <div class="row reveal">
+          <div class="when">2022 — Dec 2023</div>
+          <div>
+            <h3>Technical Lead</h3>
+            <p class="co">SFA – Webook (SuperTech Group)</p>
+            <p>Led 7+ developers, designers, QA and BAs. Structured multi-microservice integration
+              (ticketing, community, gamification, loyalty). Owned SDLC, code quality, and the Domes facility-ticketing platform.</p>
+          </div>
+        </div>
+        <div class="row reveal">
+          <div class="when">Feb 2020 — Dec 2022</div>
+          <div>
+            <h3>Senior React Native Developer</h3>
+            <p class="co">Uxbert Labs</p>
+            <p>Built SFA from scratch (200+ screens). Health trackers, analytics, deeplinking, monitoring.
+              Introduced MobX patterns and React hooks best practices across the company.</p>
+          </div>
+        </div>
+        <div class="row reveal">
+          <div class="when">2019 — 2020</div>
+          <div>
+            <h3>React Native Developer</h3>
+            <p class="co">Tarmeez · Riyadh</p>
+            <p>Built and maintained government and private apps. Hired and mentored developers.
+              Google Maps, Payfort payments, pixel-perfect delivery.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="about">
+        <div class="reveal">
+          <p class="eyebrow">About</p>
+          <h2>Hands-on leader<br>who still ships</h2>
+          <p>I translate product and business scope into technical execution. I care about modular architecture,
+            in-app payments, NCA-audited security, real-time systems, and performance. I’m a pragmatic AI advocate —
+            I set the guardrails so teams move faster without shipping low-quality output.</p>
+          <p>I also run the React / React Native Arab Telegram community (5K+ members) and mentor developers.</p>
+          <div class="chips">
+            <span>React Native</span><span>TypeScript</span><span>Architecture</span>
+            <span>Team Leadership</span><span>Payments</span><span>Security</span><span>Real-time</span>
+          </div>
+        </div>
+        <div class="about-side reveal">
+          <div class="glow"></div>
+          <img src="https://avatars.githubusercontent.com/u/35014984?v=4" alt="Mohammed Nasser" loading="lazy" />
+          <div class="facts">
+            <div><small>Languages</small><b>Arabic (Native) · English (Fluent)</b></div>
+            <div><small>Education</small><b>BCA · Bangalore University</b></div>
+            <div><small>Location</small><b>Riyadh, Saudi Arabia · Premium Residency</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="reveal">
+        <p class="eyebrow">Get in touch</p>
+        <h2>Let’s build something that scales</h2>
+        <p>Open to leadership roles, consulting, and high-impact mobile products.</p>
+        <div class="btns">
+          <a href="mailto:mohmd1919@gmail.com" class="btn primary">mohmd1919@gmail.com</a>
+          <a href="https://linkedin.com/in/mohmdalfaha" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+          <a href="https://github.com/mohmdalfaha" target="_blank" rel="noopener" class="btn">GitHub</a>
+        </div>
+        <p class="small">+966 56 747 2672 · Riyadh</p>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 Mohammed Nasser</span>
+      <span>Press <kbd>H</kbd> for curl tweaks</span>
+    </footer>
+  </div>
+
+  <div class="panel hidden" id="panel">
+    <h3>Curl tweaks</h3>
+    <div class="row">
+      <label>max curl <span id="v-curl"></span></label>
+      <input type="range" id="c-curl" min="0" max="0.3" step="0.005">
+    </div>
+    <div class="row">
+      <label>3d fringe (r/b) <span id="v-aber"></span></label>
+      <input type="range" id="c-aber" min="0" max="4" step="0.1">
+    </div>
+    <div class="row">
+      <label>go far (zoom out) <span id="v-far"></span></label>
+      <input type="range" id="c-far" min="0" max="1" step="0.01">
+    </div>
+    <div class="row">
+      <label>velocity ref (px/s) <span id="v-velref"></span></label>
+      <input type="range" id="c-velref" min="200" max="2000" step="50">
+    </div>
+    <div class="row">
+      <label>attack (s) <span id="v-attack"></span></label>
+      <input type="range" id="c-attack" min="0.01" max="0.3" step="0.005">
+    </div>
+    <div class="row">
+      <label>release (s) <span id="v-release"></span></label>
+      <input type="range" id="c-release" min="0.05" max="1" step="0.005">
+    </div>
+    <div class="row">
+      <label>lerp (smoothing) <span id="v-lerp"></span></label>
+      <input type="range" id="c-lerp" min="0.02" max="0.3" step="0.005">
+    </div>
+    <div class="readout">
+      curl: <span id="r-curl">0.000</span><br>
+      scroll: <span id="r-scroll">0</span>px
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+
+  <script>
+  /* =========================================================
+     Screen-space cylindrical curl (haoqi.design card effect)
+
+     Each card = a fullscreen quad clipped to its DOM rect
+     (uRect). The fragment shader distorts the SCREEN uv first:
+
+       centered = 2*screenUv.y - 1
+       profile  = 1 - sqrt(1 - centered²)   // circle: 0 mid, 1 edges
+       x' = (x-.5) * (1 - profile*curl) + .5
+
+     so the whole viewport curls like a cylinder — cards at the
+     vertical center stay flat, cards near the top/bottom edges
+     stretch and their edges bow. Curl strength follows scroll
+     speed with fast attack / slow release.
+
+     Card textures are real App Store screenshots, cover-fitted
+     into the 3:4 card and cross-faded to a second screenshot on
+     hover.
+     ========================================================= */
+
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const CONFIG = {
+    lerp: REDUCED ? 1 : 0.245,
+    maxCurl: REDUCED ? 0 : 0.12,
+    aberration: 0.4,
+    far: REDUCED ? 0 : 0.03,
+    velRef: 1650,
+    attack: 0.055,
+    release: 0.235,
+    cornerRadius: 18,
+  };
+
+  /* ---------- project data ---------- */
+  const PROJECTS = [
+    {
+      slug: 'koora-break', title: 'Koora Break', sub: 'Live Sports · iOS · Android',
+      stat: '383K', statLabel: 'downloads', tint: '#b8ff00',
+      url: 'https://apps.apple.com/sa/app/koora-break-live-scores-news/id6456176348',
+      desc: 'Set the technical vision and rebuilt the app from the ground up. Real-time scores via Socket.io, live-activity widgets, push, and a full telemetry layer.',
+      stack: ['React Native', 'Redux + RTK Query', 'Socket.io', 'RevenueCat', 'Sentry'],
+    },
+    {
+      slug: 'alinma-pay', title: 'AlInma Pay', sub: 'Fintech · iOS · Android · Web',
+      stat: '1M+', statLabel: 'downloads', tint: '#4fb3ff',
+      url: 'https://apps.apple.com/sa/app/alinmapay-your-daily-wallet/id1492900777',
+      desc: 'Supervised a vendor team of 10+ developers on a national digital wallet. Code reviews, technical blockers, and quality gates for a high-stakes regulated product.',
+      stack: ['Technical oversight', 'Regulated fintech', 'Quality gates'],
+    },
+    {
+      slug: 'riyadh-season', title: 'Riyadh Season', sub: 'Entertainment · iOS · Android · Web',
+      stat: '580K', statLabel: 'downloads', tint: '#3b82f6',
+      url: 'https://apps.apple.com/sa/app/riyadh-season/id6467569767',
+      desc: 'Revamped the entire app UI for the 2025 season and led the new events-calendar integration with the Webook system.',
+      stack: ['React Native', 'UI revamp', 'Webook integration'],
+    },
+    {
+      slug: 'sfa', title: 'SFA — Super Fitness App', sub: 'Fitness · iOS · Android',
+      stat: '537K', statLabel: 'downloads', tint: '#ff5a1f',
+      url: 'https://apps.apple.com/sa/app/saudi-sports-for-all/id1501523707',
+      desc: 'Led from the ground up: 200+ screens, 200+ APIs. Social, groups, events, facility ticketing, gamification, health tracking, and Domes ticketing integration.',
+      stack: ['React Native', 'MobX', 'HealthKit / Google Fit'],
+    },
+    {
+      slug: 'webook', title: 'Webook Super App', sub: 'Super App · iOS · Android · Web',
+      stat: '1M+', statLabel: 'downloads', tint: '#ff2d7a',
+      url: 'https://apps.apple.com/sa/app/webook-com-fun-things-to-do/id6468667896',
+      desc: 'Company-wide reusable architecture, multi-language + RTL, MobX patterns, and new best practices. Contributed across the platform that powers major Saudi entertainment experiences.',
+      stack: ['React Native', 'MobX', 'RTL / i18n'],
+    },
+    {
+      slug: 'ring-magazine', title: 'The Ring Magazine', sub: 'Media · iOS · Android · Web',
+      stat: '50K', statLabel: 'downloads', tint: '#f0141a',
+      url: 'https://apps.apple.com/sa/app/ring-magazine/id1261206136',
+      desc: 'Architected a modular app for worldwide boxing fans. Custom SSO, in-app subscriptions (RevenueCat), NCA-audited security with SSL pinning, Strapi CMS, multi-language.',
+      stack: ['React Native', 'Talsec', 'RevenueCat', 'Stripe'],
+    },
+    {
+      slug: 'f1-sagp', title: 'F1 Saudi Arabian GP', sub: 'Sports · iOS · Android',
+      stat: '250K', statLabel: 'downloads', tint: '#1fa864',
+      url: 'https://apps.apple.com/sa/app/f1-sagp/id1592490832',
+      desc: 'Fan companion app. Contentful CMS, custom notifications, geolocation, Situm indoor maps, Mixpanel analytics.',
+      stack: ['React Native', 'GraphQL', 'Contentful'],
+    },
+    {
+      slug: 'esports-world-cup', title: 'Esports World Cup', sub: 'Entertainment · iOS · Android',
+      stat: '20K+', statLabel: 'downloads', tint: '#ff6a00',
+      url: 'https://apps.apple.com/sa/app/esports-world-cup/id6504853584',
+      desc: 'Architected and delivered a global fan app in 3 weeks — predictions, leaderboards, social sharing.',
+      stack: ['React Native', 'MobX', 'Firebase'],
+    },
+    {
+      slug: 'burgerizzr', title: 'Burgerizzr', sub: 'Food & Drink · iOS · Android',
+      stat: '500K+', statLabel: 'downloads', tint: '#c8102e',
+      url: 'https://apps.apple.com/sa/app/burgerizzr/id1144366161',
+      desc: 'Restaurant app from scratch. Foodics + payments integration, UX optimization.',
+      stack: ['React Native', 'Foodics', 'Payments'],
+    },
+    {
+      slug: 'enjoy-saudi', title: 'Enjoy.sa', sub: 'Entertainment · iOS · Android',
+      stat: '200K+', statLabel: 'downloads', tint: '#d81b60',
+      url: 'https://apps.apple.com/sa/app/enjoy-saudi/id1213338184',
+      desc: 'Built from scratch for the General Entertainment Authority (GEA).',
+      stack: ['React Native', 'GEA'],
+    },
+  ];
+
+  /* ---------- HTML cards ---------- */
+  const grid = document.getElementById('grid');
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  PROJECTS.forEach((p, i) => {
+    const dir = `images/apps/${p.slug}`;
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <span class="idx">${String(i + 1).padStart(2, '0')} / ${PROJECTS.length}</span>
+      <a class="card-media" data-index="${i}" href="${p.url}" target="_blank" rel="noopener"
+         aria-label="${esc(p.title)} on the App Store">
+        <img src="${dir}/shot-1.jpg" alt="${esc(p.title)} app screenshot" decoding="async"
+             ${i < 3 ? 'fetchpriority="high"' : ''} />
+      </a>
+      <div class="card-meta reveal">
+        <img class="icon" src="${dir}/icon.jpg" alt="" loading="lazy" />
+        <div class="t">
+          <h3>${esc(p.title)}</h3>
+          <div class="sub">${esc(p.sub)}</div>
+        </div>
+        <div class="stat"><b>${esc(p.stat)}</b><span>${esc(p.statLabel)}</span></div>
+      </div>
+      <p class="desc reveal">${esc(p.desc)}</p>
+      <ul class="stack reveal">${p.stack.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>
+    `;
+    grid.appendChild(card);
+  });
+
+  /* ---------- renderer + fullscreen ortho scene ---------- */
+  const canvas = document.getElementById('gl');
+  let renderer = null;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  } catch (e) {
+    console.warn('WebGL unavailable — falling back to plain images', e);
+  }
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+  const vertexShader = /* glsl */`
+    varying vec2 vUv;
+    void main() {
+      vUv = position.xy * 0.5 + 0.5;
+      gl_Position = vec4(position.xy, 0.0, 1.0);
+    }
+  `;
+
+  const fragmentShader = /* glsl */`
+    precision highp float;
+    uniform sampler2D map;
+    uniform sampler2D map2;
+    uniform vec4 uRect;          // xy = bottom-left (screen uv), zw = size
+    uniform float uCurlStrength;
+    uniform float uAberration;   // red/blue split, rides the curl profile
+    uniform vec2 uCardPx;
+    uniform float uCorner;
+    uniform vec2 uImgAspect;     // w/h of map, map2
+    uniform float uFocus;        // 0 = anchor crop to top, 1 = bottom
+    uniform float uMix;          // map -> map2 crossfade
+    uniform float uReveal;       // placeholder -> image
+    uniform float uAlpha;        // overall fade-in
+    uniform vec3 uTint;
+    varying vec2 vUv;
+
+    vec2 applyCurl(vec2 screenUv, float strength) {
+      float centered = 2.0 * screenUv.y - 1.0;
+      float profile = 1.0 - sqrt(max(0.0, 1.0 - centered * centered));
+      float uvScale = 1.0 - profile * strength;
+      float distortedX = (screenUv.x - 0.5) * uvScale + 0.5;
+      return vec2(distortedX, screenUv.y);
+    }
+
+    vec2 toLocal(vec2 screenUv) {
+      return (screenUv - uRect.xy) / uRect.zw;
+    }
+
+    float roundedDist(vec2 lu) {
+      vec2 p = (lu - 0.5) * uCardPx;
+      vec2 b = uCardPx * 0.5 - vec2(uCorner);
+      vec2 d = abs(p) - b;
+      return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0) - uCorner;
+    }
+
+    // object-fit: cover, anchored by uFocus (texture v=1 is the top)
+    vec2 cover(vec2 lu, float imgAspect) {
+      float cardAspect = uCardPx.x / uCardPx.y;
+      vec2 s = vec2(1.0);
+      float r = cardAspect / imgAspect;
+      if (r > 1.0) s.y = 1.0 / r; else s.x = r;
+      vec2 off = (1.0 - s) * vec2(0.5, 1.0 - uFocus);
+      return lu * s + off;
+    }
+
+    vec4 sampleCard(vec2 lu) {
+      lu = clamp(lu, 0.0, 1.0);
+      vec4 a = texture2D(map,  cover(lu, uImgAspect.x));
+      vec4 b = texture2D(map2, cover(lu, uImgAspect.y));
+      return mix(a, b, uMix);
+    }
+
+    void main() {
+      // anaglyph: each channel bends on its own cylinder — red curls harder,
+      // blue softer — so the fringe grows with the same edge profile
+      vec2 luG = toLocal(applyCurl(vUv, uCurlStrength));
+      vec2 luR = toLocal(applyCurl(vUv, uCurlStrength * (1.0 + uAberration)));
+      vec2 luB = toLocal(applyCurl(vUv, uCurlStrength * (1.0 - uAberration)));
+
+      float d = roundedDist(luG);
+      float mask = 1.0 - smoothstep(-1.0, 1.0, d);
+      if (mask < 0.001) discard;
+
+      float r  = sampleCard(luR).r;
+      vec4 g   = sampleCard(luG);
+      float bl = sampleCard(luB).b;
+      vec3 img = vec3(r, g.g, bl);
+
+      // brand-tinted placeholder while the screenshot loads
+      vec2 lc = clamp(luG, 0.0, 1.0);
+      vec3 base = mix(uTint * 0.10, uTint * 0.28, lc.y) + vec3(0.02, 0.025, 0.035);
+      float glow = exp(-length((lc - vec2(0.5, 0.9)) * vec2(1.4, 1.0)) * 2.2);
+      base += uTint * 0.18 * glow;
+
+      vec3 color = mix(base, img, uReveal);
+
+      // hairline inner edge to lift the card off the dark background
+      float edge = smoothstep(-2.2, -0.6, d);
+      color += vec3(0.10) * edge;
+
+      gl_FragColor = vec4(color, mask * uAlpha);
+    }
+  `;
+
+  /* ---------- textures ---------- */
+  const blank = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1, THREE.RGBAFormat);
+  blank.needsUpdate = true;
+
+  function textureFromImage(img) {
+    const tex = new THREE.Texture(img);
+    tex.minFilter = THREE.LinearFilter;
+    tex.magFilter = THREE.LinearFilter;
+    tex.generateMipmaps = false;
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    tex.needsUpdate = true;
+    return tex;
+  }
+
+  function whenLoaded(img, cb) {
+    if (img.complete && img.naturalWidth) cb();
+    else img.addEventListener('load', cb, { once: true });
+  }
+
+  // An <img> laid out by CSS reports its rendered size as width/height, which
+  // makes three allocate undersized texture storage. Upload from a detached
+  // Image with the same (cached) URL instead.
+  function loadTexture(src, cb) {
+    const im = new Image();
+    im.decoding = 'async';
+    im.src = src;
+    whenLoaded(im, () => cb(textureFromImage(im), im.naturalWidth / im.naturalHeight));
+    return im;
+  }
+
+  const quadGeo = new THREE.PlaneGeometry(2, 2);
+  const planes = [];
+
+  if (renderer) {
+    document.documentElement.classList.add('gl');
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+
+    document.querySelectorAll('.card-media').forEach((el, i) => {
+      const proj = PROJECTS[i];
+      const tint = new THREE.Color(proj.tint);
+      const material = new THREE.ShaderMaterial({
+        vertexShader, fragmentShader,
+        transparent: true, depthTest: false, depthWrite: false,
+        uniforms: {
+          map: { value: blank },
+          map2: { value: blank },
+          uRect: { value: new THREE.Vector4(0, 0, 1, 1) },
+          uCurlStrength: { value: 0 },
+          uAberration: { value: CONFIG.aberration },
+          uCardPx: { value: new THREE.Vector2(1, 1) },
+          uCorner: { value: CONFIG.cornerRadius },
+          uImgAspect: { value: new THREE.Vector2(0.75, 0.75) },
+          uFocus: { value: proj.focus || 0 },
+          uMix: { value: 0 },
+          uReveal: { value: 0 },
+          uAlpha: { value: 0 },
+          uTint: { value: tint },
+        },
+      });
+      const mesh = new THREE.Mesh(quadGeo, material);
+      mesh.frustumCulled = false;
+      mesh.renderOrder = i;
+      scene.add(mesh);
+
+      const p = {
+        mesh, el, proj,
+        loaded: false, inView: false,
+        targetMix: 0, hasShot2: false, loadingShot2: false,
+      };
+      planes.push(p);
+
+      const img = el.querySelector('img');
+      loadTexture(img.currentSrc || img.src, (tex, aspect) => {
+        material.uniforms.map.value = tex;
+        material.uniforms.uImgAspect.value.x = aspect;
+        // until the hover shot arrives, crossfade to the same image
+        if (!p.hasShot2) {
+          material.uniforms.map2.value = tex;
+          material.uniforms.uImgAspect.value.y = aspect;
+        }
+        p.loaded = true;
+      });
+
+      el.addEventListener('pointerenter', () => { loadShot2(p); p.targetMix = 1; });
+      el.addEventListener('pointerleave', () => { p.targetMix = 0; });
+    });
+  }
+
+  function loadShot2(p) {
+    if (p.hasShot2 || p.loadingShot2) return;
+    p.loadingShot2 = true;
+    const img = loadTexture(`images/apps/${p.proj.slug}/shot-2.jpg`, (tex, aspect) => {
+      const u = p.mesh.material.uniforms;
+      u.map2.value = tex;
+      u.uImgAspect.value.y = aspect;
+      p.hasShot2 = true;
+    });
+    img.addEventListener('error', () => { p.loadingShot2 = false; }, { once: true });
+  }
+
+  // warm the hover screenshots once the page is idle
+  window.addEventListener('load', () => {
+    const warm = () => planes.forEach((p, i) => setTimeout(() => loadShot2(p), i * 150));
+    if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 3000 });
+    else setTimeout(warm, 1500);
+  });
+
+  /* ---------- DOM sync + smooth scroll ---------- */
+  const container = document.getElementById('scroll-container');
+  let smooth = window.scrollY;
+
+  window.FX = { forceCurl: null };  // debug: freeze the curl strength
+
+  function measure() {
+    const w = window.innerWidth, h = window.innerHeight;
+    if (renderer) renderer.setSize(w, h);
+    document.body.style.height = container.scrollHeight + 'px';
+  }
+  measure();
+  window.addEventListener('resize', measure);
+  new ResizeObserver(measure).observe(container);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+  /* anchors: elements live in a transformed fixed container, so compute
+     their layout-space position ourselves */
+  function layoutTop(el) {
+    let y = 0;
+    while (el && el !== container) { y += el.offsetTop; el = el.offsetParent; }
+    return y;
+  }
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const top = layoutTop(target) - (target.id === 'top' ? 0 : 56);
+      window.scrollTo({ top: Math.max(0, top), behavior: REDUCED ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* reveal-on-scroll for text + gating the card fade-in */
+  const io = new IntersectionObserver((entries) => {
+    for (const en of entries) {
+      if (!en.isIntersecting) continue;
+      en.target.classList.add('in');
+      io.unobserve(en.target);
+    }
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  const cardIo = new IntersectionObserver((entries) => {
+    for (const en of entries) {
+      if (!en.isIntersecting) continue;
+      const p = planes[+en.target.dataset.index];
+      if (p) p.inView = true;
+      cardIo.unobserve(en.target);
+    }
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+  planes.forEach((p) => cardIo.observe(p.el));
+
+  /* ---------- curl strength: velocity envelope ---------- */
+  let lastSmooth = null;
+  let velNorm = 0;
+
+  function curlStrength(dt) {
+    dt = Math.max(1 / 240, Math.min(dt, 0.1));
+    const instV = lastSmooth == null ? 0 : Math.abs(smooth - lastSmooth) / dt; // px/s
+    lastSmooth = smooth;
+    const target = Math.min(instV / CONFIG.velRef, 1);
+    const tau = target > velNorm ? CONFIG.attack : CONFIG.release;
+    const k = 1 - Math.exp(-dt / Math.max(tau, 1e-4));
+    velNorm += (target - velNorm) * k;
+    return CONFIG.maxCurl * velNorm;
+  }
+
+  /* ---------- render loop ---------- */
+  let lastT = performance.now();
+  const rCurl = document.getElementById('r-curl');
+  const rScroll = document.getElementById('r-scroll');
+
+  function render(now) {
+    const dt = (now - lastT) / 1000;
+    lastT = now;
+
+    const target = window.scrollY;
+    smooth += (target - smooth) * CONFIG.lerp;
+    if (Math.abs(target - smooth) < 0.05) smooth = target;
+
+    const curl = (FX.forceCurl != null) ? FX.forceCurl : curlStrength(dt);
+    const vw = window.innerWidth, vh = window.innerHeight;
+
+    // whole-scene recede: scale the ENTIRE page about the current viewport
+    // center, driven by the same velocity envelope
+    const env = curl / Math.max(CONFIG.maxCurl, 1e-6);
+    const zoom = 1 / (1 + CONFIG.far * env);
+    container.style.transformOrigin = `50% ${smooth + vh / 2}px`;
+    container.style.transform = `translate3d(0, ${-smooth}px, 0) scale(${zoom})`;
+
+    if (renderer) {
+      const ease = 1 - Math.exp(-dt * 7);
+      for (const p of planes) {
+        const r = p.el.getBoundingClientRect();
+        if (r.bottom < -vh * 0.2 || r.top > vh * 1.2) {
+          p.mesh.visible = false;
+          continue;
+        }
+        p.mesh.visible = true;
+        const u = p.mesh.material.uniforms;
+        u.uRect.value.set(r.left / vw, 1 - r.bottom / vh, r.width / vw, r.height / vh);
+        u.uCardPx.value.set(r.width, r.height);
+        u.uCurlStrength.value = curl;
+
+        u.uAlpha.value  += ((p.inView ? 1 : 0) - u.uAlpha.value) * ease;
+        u.uReveal.value += ((p.loaded ? 1 : 0) - u.uReveal.value) * ease;
+        u.uMix.value    += ((p.hasShot2 ? p.targetMix : 0) - u.uMix.value) * ease;
+      }
+      renderer.render(scene, camera);
+    }
+
+    rCurl.textContent = curl.toFixed(3);
+    rScroll.textContent = Math.round(smooth);
+    requestAnimationFrame(render);
+  }
+
+  /* ---------- tweak panel ---------- */
+  const panel = document.getElementById('panel');
+
+  function bindControl(inputId, labelId, key, fmt = (v) => v, onChange) {
+    const input = document.getElementById(inputId);
+    const label = document.getElementById(labelId);
+    input.value = CONFIG[key];
+    label.textContent = fmt(CONFIG[key]);
+    input.addEventListener('input', () => {
+      CONFIG[key] = parseFloat(input.value);
+      label.textContent = fmt(CONFIG[key]);
+      if (onChange) onChange(CONFIG[key]);
+    });
+  }
+
+  bindControl('c-curl',    'v-curl',    'maxCurl', v => v.toFixed(3));
+  bindControl('c-aber',    'v-aber',    'aberration', v => v.toFixed(1),
+    v => planes.forEach(p => p.mesh.material.uniforms.uAberration.value = v));
+  bindControl('c-far',     'v-far',     'far', v => v.toFixed(2));
+  bindControl('c-velref',  'v-velref',  'velRef',  v => v.toFixed(0));
+  bindControl('c-attack',  'v-attack',  'attack',  v => v.toFixed(3));
+  bindControl('c-release', 'v-release', 'release', v => v.toFixed(3));
+  bindControl('c-lerp',    'v-lerp',    'lerp',    v => v.toFixed(3));
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'h' && !e.metaKey && !e.ctrlKey) panel.classList.toggle('hidden');
+  });
+
+  requestAnimationFrame(render);
+  </script>
 </body>
 </html>
